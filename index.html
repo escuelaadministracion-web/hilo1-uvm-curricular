@@ -527,19 +527,19 @@
             
             <div class="question">
                 <h4>1. ¿Qué significa que el currículo sea una "praxis" y un "proyecto cultural"?</h4>
-                <textarea class="answer-field" placeholder="Escribe tu respuesta aquí... (Mínimo 150 palabras)" data-min-words="150"></textarea>
+                <textarea class="answer-field" placeholder="Escribe tu respuesta aquí..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount1">0</span></div>
             </div>
             
             <div class="question">
                 <h4>2. ¿Qué elementos del currículo pueden reflejar ideologías o intereses sociales? Proporciona al menos dos ejemplos.</h4>
-                <textarea class="answer-field" placeholder="Describe los elementos y ejemplos concretos..." data-min-words="100"></textarea>
+                <textarea class="answer-field" placeholder="Describe los elementos y ejemplos concretos..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount2">0</span></div>
             </div>
             
             <div class="question">
                 <h4>3. ¿Has vivido alguna experiencia educativa donde el currículo te pareció injusto o excluyente? ¿Por qué?</h4>
-                <textarea class="answer-field" placeholder="Comparte tu experiencia personal y análisis..." data-min-words="120"></textarea>
+                <textarea class="answer-field" placeholder="Comparte tu experiencia personal y análisis..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount3">0</span></div>
             </div>
         </div>
@@ -572,13 +572,13 @@
             
             <div class="question">
                 <h4>¿Qué modelos curriculares permiten mayor participación docente?</h4>
-                <textarea class="answer-field" placeholder="Reflexiona sobre los modelos discutidos..." data-min-words="80"></textarea>
+                <textarea class="answer-field" placeholder="Reflexiona sobre los modelos discutidos..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount4">0</span></div>
             </div>
             
             <div class="question">
                 <h4>¿Qué riesgos existen al aplicar un currículo por competencias sin contextualización?</h4>
-                <textarea class="answer-field" placeholder="Analiza los posibles riesgos..." data-min-words="100"></textarea>
+                <textarea class="answer-field" placeholder="Analiza los posibles riesgos..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount5">0</span></div>
             </div>
         </div>
@@ -586,7 +586,7 @@
         <div class="reflection-box">
             <h3>Reflexión para el debate:</h3>
             <p>"Si el currículo puede ser usado para adoctrinar, ¿cómo garantizamos que sea una herramienta de emancipación y no de dominación?"</p>
-            <textarea class="answer-field" placeholder="Desarrolla tu reflexión crítica..." data-min-words="120" style="margin-top: 15px;"></textarea>
+            <textarea class="answer-field" placeholder="Desarrolla tu reflexión crítica..." style="margin-top: 15px;"></textarea>
             <div class="word-counter">Palabras: <span id="wordCount6">0</span></div>
         </div>
         
@@ -595,13 +595,13 @@
             
             <div class="question">
                 <h4>¿Qué aprendiste del debate?</h4>
-                <textarea class="answer-field" placeholder="Sintetiza tus principales aprendizajes..." data-min-words="100"></textarea>
+                <textarea class="answer-field" placeholder="Sintetiza tus principales aprendizajes..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount7">0</span></div>
             </div>
             
             <div class="question">
                 <h4>¿Qué cambios propondrías en el currículo de tu área o asignatura?</h4>
-                <textarea class="answer-field" placeholder="Propón cambios concretos y fundamentados..." data-min-words="120"></textarea>
+                <textarea class="answer-field" placeholder="Propón cambios concretos y fundamentados..."></textarea>
                 <div class="word-counter">Palabras: <span id="wordCount8">0</span></div>
             </div>
         </div>
@@ -641,7 +641,7 @@
             </div>
             <div class="step">
                 <div class="step-number">5</div>
-                <div>Envía el PDF por la plataforma antes del <strong>18 de octubre de 2025</strong></div>
+                <div>Envía el PDF por la plataforma antes del <strong>22 de octubre de 2025</strong></div>
             </div>
         </div>
     </div>
@@ -683,7 +683,7 @@
             }
         }
 
-        // Contadores de palabras
+        // Contadores de palabras (SIN validación de mínimo)
         function configurarContadoresPalabras() {
             const campos = document.querySelectorAll('.answer-field');
             campos.forEach((campo, index) => {
@@ -693,25 +693,16 @@
                     const contadorElement = document.getElementById(contadorId);
                     if (contadorElement) {
                         contadorElement.textContent = palabras;
-                        
-                        // Cambiar color si no cumple mínimo
-                        const minPalabras = parseInt(this.getAttribute('data-min-words')) || 0;
-                        if (palabras < minPalabras) {
-                            contadorElement.style.color = '#e53935';
-                        } else {
-                            contadorElement.style.color = '#43a047';
-                        }
                     }
                     
                     actualizarProgreso();
                 });
             });
 
-            // Actualizar vista previa del nombre cuando cambie el nombre del estudiante
             document.getElementById('studentName').addEventListener('input', actualizarVistaPreviaNombre);
         }
 
-        // Actualizar barra de progreso
+        // Actualizar barra de progreso (AHORA AVANZA CON CUALQUIER TEXTO)
         function actualizarProgreso() {
             const campos = document.querySelectorAll('.answer-field, .debate-checkbox');
             let completados = 0;
@@ -721,11 +712,12 @@
                 if (campo.type === 'checkbox') {
                     if (campo.checked) completados++;
                 } else if (campo.type === 'textarea') {
-                    if (campo.value.trim().length > 50) completados++;
+                    // ✅ CAMBIO CLAVE: Ahora cuenta como completado con CUALQUIER texto
+                    if (campo.value.trim().length > 0) completados++;
                 }
             });
             
-            // Añadir campos de información del estudiante
+            // Campos de información del estudiante
             const studentName = document.getElementById('studentName').value;
             const studentId = document.getElementById('studentId').value;
             const studentEmail = document.getElementById('studentEmail').value;
@@ -750,11 +742,11 @@
             }
         }
 
-        // Validar completitud antes de exportar
+        // Validar completitud (SIN verificar mínimos de palabras)
         function validarCompletitud() {
             const errores = [];
             
-            // Validar información del estudiante
+            // Solo validar información del estudiante y que los campos no estén vacíos
             const studentName = document.getElementById('studentName').value.trim();
             const studentId = document.getElementById('studentId').value.trim();
             const studentEmail = document.getElementById('studentEmail').value.trim();
@@ -763,18 +755,15 @@
             if (!studentId) errores.push("Cédula de identidad");
             if (!studentEmail) errores.push("Correo electrónico");
             
-            // Validar respuestas de texto
+            // ✅ CAMBIO: Solo verificar que los campos no estén vacíos, SIN mínimo de palabras
             const camposTexto = document.querySelectorAll('.answer-field');
             camposTexto.forEach((campo, index) => {
-                const minPalabras = parseInt(campo.getAttribute('data-min-words')) || 0;
-                const palabras = campo.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-                
-                if (palabras < minPalabras) {
-                    errores.push(`Pregunta ${index + 1} (mínimo ${minPalabras} palabras)`);
+                if (campo.value.trim().length === 0) {
+                    errores.push(`Pregunta ${index + 1} (debes escribir una respuesta)`);
                 }
             });
             
-            // Mostrar resultados de validación
+            // Mostrar resultados
             const alerta = document.getElementById('validationAlert');
             const lista = document.getElementById('validationList');
             
@@ -898,7 +887,7 @@
             });
             
             // Mostrar alerta con el nombre del archivo
-            alert(`📄 Tu archivo se descargará como: ${nombreArchivo}\n\nRecuerda enviarlo por la plataforma antes del 18/10/2025`);
+            alert(`📄 Tu archivo se descargará como: ${nombreArchivo}\n\nRecuerda enviarlo por la plataforma antes del 22/10/2025`);
             
             // Imprimir (que generará el PDF)
             window.print();
