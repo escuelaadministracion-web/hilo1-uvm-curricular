@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Interactiva - Hilo 1: Debate Curricular</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2575fc, #6a11cb, #2575fc);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .header h1 {
+            color: #2575fc;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header h2 {
+            color: #6a11cb;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .university-info {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .badge {
+            background: #2575fc;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .student-info-form {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #90caf9;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #1976d2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: #2575fc;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #eaeaea;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "📌";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #6a11cb;
+        }
+        
+        .question h4 {
+            color: #6a11cb;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question h4::before {
+            content: "❓";
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        .answer-field {
+            width: 100%;
+            min-height: 120px;
+            border: 2px dashed #2575fc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            background: #f8fbff;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-field:focus {
+            border-color: #6a11cb;
+            background: #fff;
+            outline: none;
+            border-style: solid;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+        
+        .answer-field::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .checkbox-list {
+            margin: 15px 0;
+        }
+        
+        .checkbox-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        
+        .checkbox-item:hover {
+            background: #f0f0f0;
+        }
+        
+        .checkbox-item input {
+            margin-right: 12px;
+            margin-top: 5px;
+            transform: scale(1.2);
+        }
+        
+        .checkbox-item label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .reflection-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reflection-box::before {
+            content: "💡";
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+        
+        .reflection-box h3 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .instructions h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .instructions h4::before {
+            content: "📋";
+            margin-right: 8px;
+        }
+        
+        .word-counter {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: right;
+            margin-top: 5px;
+        }
+        
+        .interactive-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            color: white;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-print {
+            background: linear-gradient(135deg, #2196f3 0%, #0d47a1 100%);
+            color: white;
+        }
+        
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #ff9800 0%, #ef6c00 100%);
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .btn-validate {
+            background: linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%);
+            color: white;
+        }
+        
+        .btn-validate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+        }
+        
+        .timer {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .completion-status {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .validation-alert {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .validation-alert ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .section {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+            
+            .no-print {
+                display: none;
+            }
+            
+            .answer-field {
+                border: 1px solid #999;
+                min-height: 100px;
+            }
+        }
+        
+        .floating-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .download-instructions {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .download-instructions h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-instructions h4::before {
+            content: "💾";
+            margin-right: 8px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background: #2575fc;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-info no-print">
+        <div class="timer">⏱️ Tiempo estimado: 2 horas</div>
+        <div class="badge">Hilo 1 - 20 puntos</div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Ficha de Trabajo Interactiva</h1>
+            <h2>"¿Por qué el currículo no es neutro?"</h2>
+            <div class="university-info">
+                Universidad José María Vargas - Asignatura: Currículo Básico Nacional<br>
+                Docente: Miguel Subero | Fecha: <span id="currentDate"></span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <div class="completion-status" id="completionStatus">
+                Completa todas las secciones para habilitar el guardado
+            </div>
+        </div>
+        
+        <div class="student-info-form no-print">
+            <h3>📝 Información del Estudiante</h3>
+            <div class="form-group">
+                <label for="studentName">Nombre completo:</label>
+                <input type="text" id="studentName" class="form-control" placeholder="Ej: María José Pérez González">
+            </div>
+            <div class="form-group">
+                <label for="studentId">Cédula de identidad:</label>
+                <input type="text" id="studentId" class="form-control" placeholder="Ej: V-25.123.456">
+            </div>
+            <div class="form-group">
+                <label for="studentEmail">Correo electrónico:</label>
+                <input type="email" id="studentEmail" class="form-control" placeholder="Ej: maria.perez@correo.com">
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h4>Instrucciones de la Actividad</h4>
+            <p><strong>Paso 1:</strong> Lee los textos asignados (Gimeno Sacristán y Tyler).</p>
+            <p><strong>Paso 2:</strong> Completa todas las secciones escribiendo directamente en los campos.</p>
+            <p><strong>Paso 3:</strong> Participa en el debate en clase marcando las ideas discutidas.</p>
+            <p><strong>Paso 4:</strong> Guarda tu progreso y exporta a PDF para entregar.</p>
+        </div>
+        
+        <div class="validation-alert" id="validationAlert">
+            <h4>⚠️ Atención: Faltan campos por completar</h4>
+            <p>Para poder exportar correctamente, debes completar:</p>
+            <ul id="validationList"></ul>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">Parte I – Reflexión individual (previa al debate)</h3>
+            
+            <div class="question">
+                <h4>1. ¿Qué significa que el currículo sea una "praxis" y un "proyecto cultural"?</h4>
+                <textarea class="answer-field" placeholder="Escribe tu respuesta aquí... (Mínimo 150 palabras)" data-min-words="150"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount1">0</span></div>
+            </div>
+            
+            <div class="question">
+                <h4>2. ¿Qué elementos del currículo pueden reflejar ideologías o intereses sociales? Proporciona al menos dos ejemplos.</h4>
+                <textarea class="answer-field" placeholder="Describe los elementos y ejemplos concretos..." data-min-words="100"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount2">0</span></div>
+            </div>
+            
+            <div class="question">
+                <h4>3. ¿Has vivido alguna experiencia educativa donde el currículo te pareció injusto o excluyente? ¿Por qué?</h4>
+                <textarea class="answer-field" placeholder="Comparte tu experiencia personal y análisis..." data-min-words="120"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount3">0</span></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">Parte II – Debate guiado (en clase)</h3>
+            <p>Marca las ideas que surjan durante el debate:</p>
+            
+            <div class="question">
+                <h4>¿Qué argumentos apoyan la idea de que el currículo no es neutro?</h4>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arg1" class="debate-checkbox">
+                        <label for="arg1">La selección cultural (¿qué se incluye y qué se excluye?)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arg2" class="debate-checkbox">
+                        <label for="arg2">El currículo oculto (¿qué se aprende "sin que se enseñe"?)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arg3" class="debate-checkbox">
+                        <label for="arg3">Los intereses políticos y económicos detrás de las reformas</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arg4" class="debate-checkbox">
+                        <label for="arg4">Otros: <input type="text" class="other-argument" placeholder="Escribe otros argumentos..." style="margin-left: 10px; padding: 5px; width: 70%; border: 1px solid #ccc; border-radius: 4px;"></label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h4>¿Qué modelos curriculares permiten mayor participación docente?</h4>
+                <textarea class="answer-field" placeholder="Reflexiona sobre los modelos discutidos..." data-min-words="80"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount4">0</span></div>
+            </div>
+            
+            <div class="question">
+                <h4>¿Qué riesgos existen al aplicar un currículo por competencias sin contextualización?</h4>
+                <textarea class="answer-field" placeholder="Analiza los posibles riesgos..." data-min-words="100"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount5">0</span></div>
+            </div>
+        </div>
+        
+        <div class="reflection-box">
+            <h3>Reflexión para el debate:</h3>
+            <p>"Si el currículo puede ser usado para adoctrinar, ¿cómo garantizamos que sea una herramienta de emancipación y no de dominación?"</p>
+            <textarea class="answer-field" placeholder="Desarrolla tu reflexión crítica..." data-min-words="120" style="margin-top: 15px;"></textarea>
+            <div class="word-counter">Palabras: <span id="wordCount6">0</span></div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">Parte III – Cierre y reflexión personal</h3>
+            
+            <div class="question">
+                <h4>¿Qué aprendiste del debate?</h4>
+                <textarea class="answer-field" placeholder="Sintetiza tus principales aprendizajes..." data-min-words="100"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount7">0</span></div>
+            </div>
+            
+            <div class="question">
+                <h4>¿Qué cambios propondrías en el currículo de tu área o asignatura?</h4>
+                <textarea class="answer-field" placeholder="Propón cambios concretos y fundamentados..." data-min-words="120"></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount8">0</span></div>
+            </div>
+        </div>
+        
+        <div class="interactive-buttons no-print">
+            <button class="btn btn-validate" onclick="validarCompletitud()">
+                ✅ Validar Completitud
+            </button>
+            <button class="btn btn-save" onclick="guardarProgreso()">
+                💾 Guardar Progreso
+            </button>
+            <button class="btn btn-print" onclick="exportarPDF()">
+                📄 Exportar a PDF
+            </button>
+            <button class="btn btn-reset" onclick="resetearFormulario()">
+                🔄 Reiniciar
+            </button>
+        </div>
+        
+        <div class="download-instructions no-print">
+            <h4>📥 Instrucciones para Guardar y Entregar</h4>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>Completa todos los campos y haz clic en "Guardar Progreso" periódicamente</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>Usa "Validar Completitud" para verificar que todo esté completo</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>Haz clic en "Exportar a PDF" para generar tu archivo de entrega</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>El archivo se descargará automáticamente con el nombre: <strong id="fileNamePreview">Hilo1_Apellido_Nombre.pdf</strong></div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div>Envía el PDF por la plataforma antes del <strong>18 de octubre de 2025</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fecha actual
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const dateString = today.toLocaleDateString('es-ES', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('currentDate').textContent = dateString;
+            
+            // Cargar respuestas guardadas
+            cargarProgreso();
+            
+            // Configurar contadores de palabras
+            configurarContadoresPalabras();
+            
+            // Actualizar barra de progreso
+            actualizarProgreso();
+            
+            // Actualizar vista previa del nombre de archivo
+            actualizarVistaPreviaNombre();
+        });
+
+        // Actualizar vista previa del nombre de archivo
+        function actualizarVistaPreviaNombre() {
+            const nombre = document.getElementById('studentName').value;
+            if (nombre) {
+                const partes = nombre.split(' ');
+                const apellido = partes[partes.length - 1] || '';
+                const nombrePila = partes[0] || '';
+                const nombreArchivo = `Hilo1_${apellido}_${nombrePila}.pdf`;
+                document.getElementById('fileNamePreview').textContent = nombreArchivo;
+            }
+        }
+
+        // Contadores de palabras
+        function configurarContadoresPalabras() {
+            const campos = document.querySelectorAll('.answer-field');
+            campos.forEach((campo, index) => {
+                campo.addEventListener('input', function() {
+                    const palabras = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    const contadorId = 'wordCount' + (index + 1);
+                    const contadorElement = document.getElementById(contadorId);
+                    if (contadorElement) {
+                        contadorElement.textContent = palabras;
+                        
+                        // Cambiar color si no cumple mínimo
+                        const minPalabras = parseInt(this.getAttribute('data-min-words')) || 0;
+                        if (palabras < minPalabras) {
+                            contadorElement.style.color = '#e53935';
+                        } else {
+                            contadorElement.style.color = '#43a047';
+                        }
+                    }
+                    
+                    actualizarProgreso();
+                });
+            });
+
+            // Actualizar vista previa del nombre cuando cambie el nombre del estudiante
+            document.getElementById('studentName').addEventListener('input', actualizarVistaPreviaNombre);
+        }
+
+        // Actualizar barra de progreso
+        function actualizarProgreso() {
+            const campos = document.querySelectorAll('.answer-field, .debate-checkbox');
+            let completados = 0;
+            let total = campos.length;
+            
+            campos.forEach(campo => {
+                if (campo.type === 'checkbox') {
+                    if (campo.checked) completados++;
+                } else if (campo.type === 'textarea') {
+                    if (campo.value.trim().length > 50) completados++;
+                }
+            });
+            
+            // Añadir campos de información del estudiante
+            const studentName = document.getElementById('studentName').value;
+            const studentId = document.getElementById('studentId').value;
+            const studentEmail = document.getElementById('studentEmail').value;
+            
+            if (studentName.trim().length > 0) completados++;
+            if (studentId.trim().length > 0) completados++;
+            if (studentEmail.trim().length > 0) completados++;
+            total += 3;
+            
+            const porcentaje = Math.min(100, (completados / total) * 100);
+            document.getElementById('progressBar').style.width = porcentaje + '%';
+            
+            const statusElement = document.getElementById('completionStatus');
+            if (porcentaje === 100) {
+                statusElement.innerHTML = '✅ ¡Felicidades! Has completado todas las secciones. Ya puedes guardar y exportar.';
+                statusElement.style.background = '#e8f5e9';
+                statusElement.style.color = '#2e7d32';
+            } else {
+                statusElement.innerHTML = `📝 Progreso: ${Math.round(porcentaje)}% completado. Sigue completando las secciones.`;
+                statusElement.style.background = '#fff3e0';
+                statusElement.style.color = '#e65100';
+            }
+        }
+
+        // Validar completitud antes de exportar
+        function validarCompletitud() {
+            const errores = [];
+            
+            // Validar información del estudiante
+            const studentName = document.getElementById('studentName').value.trim();
+            const studentId = document.getElementById('studentId').value.trim();
+            const studentEmail = document.getElementById('studentEmail').value.trim();
+            
+            if (!studentName) errores.push("Nombre completo del estudiante");
+            if (!studentId) errores.push("Cédula de identidad");
+            if (!studentEmail) errores.push("Correo electrónico");
+            
+            // Validar respuestas de texto
+            const camposTexto = document.querySelectorAll('.answer-field');
+            camposTexto.forEach((campo, index) => {
+                const minPalabras = parseInt(campo.getAttribute('data-min-words')) || 0;
+                const palabras = campo.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                
+                if (palabras < minPalabras) {
+                    errores.push(`Pregunta ${index + 1} (mínimo ${minPalabras} palabras)`);
+                }
+            });
+            
+            // Mostrar resultados de validación
+            const alerta = document.getElementById('validationAlert');
+            const lista = document.getElementById('validationList');
+            
+            if (errores.length === 0) {
+                alerta.style.display = 'none';
+                alert('✅ ¡Perfecto! Todas las secciones están completas. Puedes exportar tu trabajo.');
+            } else {
+                lista.innerHTML = '';
+                errores.forEach(error => {
+                    const li = document.createElement('li');
+                    li.textContent = error;
+                    lista.appendChild(li);
+                });
+                alerta.style.display = 'block';
+                alerta.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Guardar progreso en localStorage
+        function guardarProgreso() {
+            const datos = {};
+            
+            // Guardar información del estudiante
+            datos.studentName = document.getElementById('studentName').value;
+            datos.studentId = document.getElementById('studentId').value;
+            datos.studentEmail = document.getElementById('studentEmail').value;
+            
+            // Guardar respuestas de texto
+            const camposTexto = document.querySelectorAll('.answer-field');
+            camposTexto.forEach((campo, index) => {
+                datos[`respuesta_${index}`] = campo.value;
+            });
+            
+            // Guardar checkboxes
+            const checkboxes = document.querySelectorAll('.debate-checkbox');
+            checkboxes.forEach((checkbox, index) => {
+                datos[`checkbox_${index}`] = checkbox.checked;
+            });
+            
+            // Guardar argumentos otros
+            const otrosArgumentos = document.querySelectorAll('.other-argument');
+            otrosArgumentos.forEach((input, index) => {
+                datos[`otro_${index}`] = input.value;
+            });
+            
+            localStorage.setItem('hilo1_debate_curricular', JSON.stringify(datos));
+            
+            // Mostrar confirmación
+            alert('✅ Progreso guardado correctamente. Puedes cerrar esta página y volver más tarde.');
+        }
+
+        // Cargar progreso guardado
+        function cargarProgreso() {
+            const guardado = localStorage.getItem('hilo1_debate_curricular');
+            if (guardado) {
+                const datos = JSON.parse(guardado);
+                
+                // Cargar información del estudiante
+                if (datos.studentName) document.getElementById('studentName').value = datos.studentName;
+                if (datos.studentId) document.getElementById('studentId').value = datos.studentId;
+                if (datos.studentEmail) document.getElementById('studentEmail').value = datos.studentEmail;
+                
+                // Cargar respuestas de texto
+                const camposTexto = document.querySelectorAll('.answer-field');
+                camposTexto.forEach((campo, index) => {
+                    if (datos[`respuesta_${index}`]) {
+                        campo.value = datos[`respuesta_${index}`];
+                        // Disparar evento input para actualizar contadores
+                        campo.dispatchEvent(new Event('input'));
+                    }
+                });
+                
+                // Cargar checkboxes
+                const checkboxes = document.querySelectorAll('.debate-checkbox');
+                checkboxes.forEach((checkbox, index) => {
+                    if (datos[`checkbox_${index}`] !== undefined) {
+                        checkbox.checked = datos[`checkbox_${index}`];
+                    }
+                });
+                
+                // Cargar argumentos otros
+                const otrosArgumentos = document.querySelectorAll('.other-argument');
+                otrosArgumentos.forEach((input, index) => {
+                    if (datos[`otro_${index}`]) {
+                        input.value = datos[`otro_${index}`];
+                    }
+                });
+                
+                actualizarProgreso();
+                actualizarVistaPreviaNombre();
+            }
+        }
+
+        // Exportar a PDF
+        function exportarPDF() {
+            // Validar antes de exportar
+            validarCompletitud();
+            
+            // Verificar si hay errores de validación
+            const alerta = document.getElementById('validationAlert');
+            if (alerta.style.display === 'block') {
+                if (!confirm('⚠️ Aún tienes secciones incompletas. ¿Estás seguro de que quieres exportar?')) {
+                    return;
+                }
+            }
+            
+            // Obtener nombre del estudiante para el archivo
+            const nombre = document.getElementById('studentName').value;
+            let nombreArchivo = 'Hilo1_Debate_Curricular.pdf';
+            
+            if (nombre) {
+                const partes = nombre.split(' ');
+                const apellido = partes[partes.length - 1] || '';
+                const nombrePila = partes[0] || '';
+                nombreArchivo = `Hilo1_${apellido}_${nombrePila}.pdf`;
+            }
+            
+            // Ocultar elementos no imprimibles
+            document.querySelectorAll('.no-print').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Mostrar alerta con el nombre del archivo
+            alert(`📄 Tu archivo se descargará como: ${nombreArchivo}\n\nRecuerda enviarlo por la plataforma antes del 18/10/2025`);
+            
+            // Imprimir (que generará el PDF)
+            window.print();
+            
+            // Restaurar elementos después de un tiempo
+            setTimeout(() => {
+                document.querySelectorAll('.no-print').forEach(el => {
+                    el.style.display = '';
+                });
+            }, 1000);
+        }
+
+        // Resetear formulario
+        function resetearFormulario() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo el formulario? Se perderán todas tus respuestas.')) {
+                localStorage.removeItem('hilo1_debate_curricular');
+                
+                document.querySelectorAll('.answer-field').forEach(campo => {
+                    campo.value = '';
+                    campo.dispatchEvent(new Event('input'));
+                });
+                
+                document.querySelectorAll('.debate-checkbox').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                document.querySelectorAll('.other-argument').forEach(input => {
+                    input.value = '';
+                });
+                
+                document.getElementById('studentName').value = '';
+                document.getElementById('studentId').value = '';
+                document.getElementById('studentEmail').value = '';
+                
+                document.getElementById('validationAlert').style.display = 'none';
+                
+                actualizarProgreso();
+                actualizarVistaPreviaNombre();
+                alert('Formulario reiniciado correctamente.');
+            }
+        }
+
+        // Actualizar progreso cuando cambien los checkboxes y campos de estudiante
+        document.querySelectorAll('.debate-checkbox, .other-argument, .form-control').forEach(elemento => {
+            elemento.addEventListener('change', actualizarProgreso);
+            elemento.addEventListener('input', actualizarProgreso);
+        });
+    </script>
+</body>
+</html>
