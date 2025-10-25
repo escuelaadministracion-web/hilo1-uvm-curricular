@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 1 - Evolución Curricular Venezuela | UVM</title>
+    <style>
+        /* MISMOS ESTILOS EXACTOS DEL HILO 1 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2575fc, #6a11cb, #2575fc);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .header h1 {
+            color: #2575fc;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header h2 {
+            color: #6a11cb;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .university-info {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .badge {
+            background: #2575fc;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .student-info-form {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #90caf9;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #1976d2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: #2575fc;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #eaeaea;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "📌";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #6a11cb;
+        }
+        
+        .question h4 {
+            color: #6a11cb;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question h4::before {
+            content: "❓";
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        .answer-field {
+            width: 100%;
+            min-height: 120px;
+            border: 2px dashed #2575fc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            background: #f8fbff;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-field:focus {
+            border-color: #6a11cb;
+            background: #fff;
+            outline: none;
+            border-style: solid;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+        
+        .answer-field::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .document-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .document-box h4 {
+            color: #2575fc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .document-box h4::before {
+            content: "📄";
+            margin-right: 10px;
+        }
+        
+        .document-content {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #6a11cb;
+        }
+        
+        .document-content ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .case-study {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .case-study h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .case-study h4::before {
+            content: "🏫";
+            margin-right: 10px;
+        }
+        
+        .case-description {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .word-counter {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: right;
+            margin-top: 5px;
+        }
+        
+        .interactive-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            color: white;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-print {
+            background: linear-gradient(135deg, #2196f3 0%, #0d47a1 100%);
+            color: white;
+        }
+        
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #ff9800 0%, #ef6c00 100%);
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .btn-validate {
+            background: linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%);
+            color: white;
+        }
+        
+        .btn-validate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+        }
+        
+        .completion-status {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Estilos para las instrucciones de descarga mejoradas */
+        .download-instructions {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .download-instructions h4 {
+            color: #2575fc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-instructions h4::before {
+            content: "📥";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #6a11cb;
+            transition: transform 0.2s ease;
+        }
+        
+        .step:hover {
+            transform: translateX(5px);
+        }
+        
+        .step-number {
+            background: #2575fc;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .sugerencia-pdf {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        
+        .instructions {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .instructions h4 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .instructions h4::before {
+            content: "📋";
+            margin-right: 10px;
+        }
+        
+        .instructions p {
+            margin-bottom: 10px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .section {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+            
+            .no-print {
+                display: none;
+            }
+            
+            .answer-field {
+                border: 1px solid #999;
+                min-height: 100px;
+            }
+        }
+        
+        .floating-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .teacher-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-info no-print">
+        <div class="badge">Tarea 1 - 40 puntos</div>
+        <div class="teacher-badge">👨‍🏫 Rol Docente</div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Tarea 1 - Evolución Curricular Venezuela</h1>
+            <h2>Análisis Histórico y Práctica Docente</h2>
+            <div class="university-info">
+                Universidad José María Vargas - Asignatura: Currículo Básico Nacional<br>
+                Docente: Miguel Subero | Fecha: <span id="currentDate"></span>
+            </div>
+            <div class="teacher-badge">🎯 Actividad Individual - Enfoque en Práctica Docente</div>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <div class="completion-status" id="completionStatus">
+                Completa todas las secciones para habilitar el guardado
+            </div>
+        </div>
+        
+        <div class="student-info-form no-print">
+            <h3>📝 Información del Estudiante</h3>
+            <div class="form-group">
+                <label for="studentName">Nombre completo:</label>
+                <input type="text" id="studentName" class="form-control" placeholder="Ej: María José Pérez González">
+            </div>
+            <div class="form-group">
+                <label for="studentId">Cédula de identidad:</label>
+                <input type="text" id="studentId" class="form-control" placeholder="Ej: V-25.123.456">
+            </div>
+            <div class="form-group">
+                <label for="studentEmail">Correo electrónico:</label>
+                <input type="email" id="studentEmail" class="form-control" placeholder="Ej: maria.perez@correo.com">
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h4>📋 Instrucciones de la Actividad</h4>
+            <p><strong>Propósito:</strong> Analizar la evolución del currículo venezolano desde tu perspectiva como futuro docente.</p>
+            <p><strong>Paso 1:</strong> Lee los documentos incluidos sobre CBN 1997 y CNB 2007.</p>
+            <p><strong>Paso 2:</strong> Responde las preguntas de análisis desde tu rol docente.</p>
+            <p><strong>Paso 3:</strong> Analiza el caso práctico aplicando los conceptos aprendidos.</p>
+            <p><strong>Paso 4:</strong> Exporta a PDF y envía por la plataforma.</p>
+        </div>
+
+        <!-- SECCIÓN 1: ANÁLISIS HISTÓRICO -->
+        <div class="section">
+            <h3 class="section-title">📚 Análisis Histórico - Reformas Curriculares</h3>
+            
+            <div class="document-box">
+                <h4>Documento 1: Currículo Básico Nacional (CBN 1997)</h4>
+                <div class="document-content">
+                    <p><strong>Contexto Histórico:</strong> Implementado durante la reforma educativa de los años 90, en un contexto de apertura democrática y modernización del sistema educativo.</p>
+                    
+                    <p><strong>Características Principales:</strong></p>
+                    <ul>
+                        <li><strong>Enfoque por competencias:</strong> Desarrollo de habilidades prácticas</li>
+                        <li><strong>Ejes transversales:</strong> Ambiente, salud, derechos humanos</li>
+                        <li><strong>Proyectos pedagógicos:</strong> Aprendizaje basado en proyectos</li>
+                        <li><strong>Evaluación continua:</strong> Seguimiento del proceso de aprendizaje</li>
+                        <li><strong>Flexibilidad curricular:</strong> Adaptación al contexto local</li>
+                    </ul>
+                    
+                    <p><strong>Visión del Docente:</strong> Facilitador del aprendizaje, investigador en el aula.</p>
+                </div>
+                
+                <div class="question">
+                    <h4>👨‍🏫 Desde tu rol docente: ¿Qué aspectos del CBN consideras más valiosos para tu práctica profesional?</h4>
+                    <textarea class="answer-field" placeholder="Reflexiona sobre elementos que enriquecerían tu labor como docente..."></textarea>
+                    <div class="word-counter">Palabras: <span id="wordCount1">0</span></div>
+                </div>
+            </div>
+
+            <div class="document-box">
+                <h4>Documento 2: Currículo Nacional Bolivariano (CNB 2007)</h4>
+                <div class="document-content">
+                    <p><strong>Contexto Histórico:</strong> Surge en el marco del Proyecto Educativo Bolivariano, alineado con el proyecto político-social del momento.</p>
+                    
+                    <p><strong>Características Principales:</strong></p>
+                    <ul>
+                        <li><strong>Pilares educativos:</strong> Aprender a crear, convivir y participar</li>
+                        <li><strong>Ejes integradores:</strong> Ambiente, salud, interculturalidad</li>
+                        <li><strong>Áreas de aprendizaje:</strong> Organización por áreas integradas</li>
+                        <li><strong>Enfoque social:</strong> Formación para la soberanía nacional</li>
+                        <li><strong>Participación comunitaria:</strong> Vinculación escuela-comunidad</li>
+                    </ul>
+                    
+                    <p><strong>Visión del Docente:</strong> Transformador social, guía del proceso liberador.</p>
+                </div>
+                
+                <div class="question">
+                    <h4>👨‍🏫 Desde tu rol docente: ¿Qué diferencias fundamentales encuentras en la concepción del docente entre CBN y CNB?</h4>
+                    <textarea class="answer-field" placeholder="Analiza cómo cambia la visión del rol docente entre ambas reformas..."></textarea>
+                    <div class="word-counter">Palabras: <span id="wordCount2">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: ANÁLISIS COMPARATIVO -->
+        <div class="section">
+            <h3 class="section-title">⚖️ Análisis Comparativo - Perspectiva Docente</h3>
+            
+            <div class="question">
+                <h4>🔍 ¿Cómo evaluarías el impacto de estas reformas en la práctica docente actual?</h4>
+                <textarea class="answer-field" placeholder="Considera aspectos como autonomía, recursos, formación continua..."></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount3">0</span></div>
+            </div>
+            
+            <div class="question">
+                <h4>💡 Si tuvieras que diseñar una propuesta curricular actual, ¿qué elementos rescatarías de cada reforma?</h4>
+                <textarea class="answer-field" placeholder="Propón una síntesis personal basada en tu visión como futuro docente..."></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount4">0</span></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: CASO PRÁCTICO INDIVIDUAL -->
+        <div class="section">
+            <h3 class="section-title">🏫 Caso Práctico - Aplicación en Contexto Real</h3>
+            
+            <div class="case-study">
+                <h4>Escenario: "Adaptación Curricular en Contexto Específico"</h4>
+                <div class="case-description">
+                    <p><strong>Contexto:</strong> Eres docente en una escuela rural andina. El 80% de tus estudiantes son de origen indígena, los recursos son limitados y la conexión a internet es intermitente.</p>
+                    
+                    <p><strong>Desafío Docente:</strong> Debes planificar tu año escolar adaptando el currículo oficial a este contexto específico, manteniendo los aprendizajes esenciales pero contextualizando la enseñanza.</p>
+                    
+                    <p><strong>Tus estudiantes:</strong> Tienen conocimientos ancestrales sobre agricultura, tradiciones orales ricas y fuerte sentido comunitario.</p>
+                </div>
+
+                <div class="question">
+                    <h4>📋 Planificación Docente: ¿Cómo adaptarías los contenidos curriculares oficiales a este contexto?</h4>
+                    <textarea class="answer-field" placeholder="Describe tu estrategia de adaptación curricular..."></textarea>
+                    <div class="word-counter">Palabras: <span id="wordCount5">0</span></div>
+                </div>
+                
+                <div class="question">
+                    <h4>🔄 Metodología: ¿Qué estrategias de enseñanza utilizarías para valorar los conocimientos previos de tus estudiantes?</h4>
+                    <textarea class="answer-field" placeholder="Explica tu enfoque metodológico..."></textarea>
+                    <div class="word-counter">Palabras: <span id="wordCount6">0</span></div>
+                </div>
+                
+                <div class="question">
+                    <h4>📊 Evaluación: ¿Cómo evaluarías los aprendizajes de manera contextualizada y justa?</h4>
+                    <textarea class="answer-field" placeholder="Describe tu sistema de evaluación..."></textarea>
+                    <div class="word-counter">Palabras: <span id="wordCount7">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: REFLEXIÓN FINAL -->
+        <div class="section">
+            <h3 class="section-title">💡 Reflexión Final - Desarrollo Profesional Docente</h3>
+            
+            <div class="question">
+                <h4>🎯 ¿Qué has aprendido sobre la evolución curricular venezolana que enriquecerá tu práctica docente futura?</h4>
+                <textarea class="answer-field" placeholder="Sintetiza tus principales aprendizajes..."></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount8">0</span></div>
+            </div>
+            
+            <div class="question">
+                <h4>🚀 ¿Cómo planeas aplicar estos conocimientos en tu desarrollo profesional como docente?</h4>
+                <textarea class="answer-field" placeholder="Describe tu plan de aplicación práctica..."></textarea>
+                <div class="word-counter">Palabras: <span id="wordCount9">0</span></div>
+            </div>
+        </div>
+        
+        <!-- BOTONES INTERACTIVOS -->
+        <div class="interactive-buttons no-print">
+            <button class="btn btn-validate" onclick="validarCompletitud()">
+                ✅ Validar Completitud
+            </button>
+            <button class="btn btn-save" onclick="guardarProgreso()">
+                💾 Guardar Progreso
+            </button>
+            <button class="btn btn-print" onclick="exportarPDF()">
+                📄 Exportar a PDF
+            </button>
+            <button class="btn btn-reset" onclick="resetearFormulario()">
+                🔄 Reiniciar
+            </button>
+        </div>
+        
+        <!-- INSTRUCCIONES MEJORADAS PARA GUARDAR Y ENTREGAR -->
+        <div class="download-instructions no-print">
+            <h4>📥 Instrucciones para Guardar y Entregar tu Tarea</h4>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div><strong>Completa todos los campos</strong> desde tu perspectiva docente.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div><strong>Valida la completitud</strong> usando el botón "Validar Completitud".</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div><strong>Exporta a PDF</strong> haciendo clic en "Exportar a PDF".</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div><strong>Verifica la descarga:</strong> El archivo se descargará automáticamente con el nombre:<br>
+                    <strong>Formato:</strong> <code id="fileNamePreview">Tarea1_Apellido_Nombre.pdf</code>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="sugerencia-pdf">⭐ <strong>Sugerencia importante:</strong> Antes de enviar, revisa el PDF generado para asegurarte de que todo el contenido se ve correctamente y no hay errores.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div><strong>Entrega el PDF</strong> a través de la plataforma antes de la fecha y hora límite.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MISMAS FUNCIONALIDADES JAVASCRIPT DEL HILO 1
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const dateString = today.toLocaleDateString('es-ES', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('currentDate').textContent = dateString;
+            
+            cargarProgreso();
+            configurarContadoresPalabras();
+            actualizarProgreso();
+            actualizarVistaPreviaNombre();
+        });
+
+        function actualizarVistaPreviaNombre() {
+            const nombre = document.getElementById('studentName').value;
+            if (nombre) {
+                const partes = nombre.split(' ');
+                const apellido = partes[partes.length - 1] || '';
+                const nombrePila = partes[0] || '';
+                const nombreArchivo = `Tarea1_${apellido}_${nombrePila}.pdf`;
+                document.getElementById('fileNamePreview').textContent = nombreArchivo;
+            }
+        }
+
+        function configurarContadoresPalabras() {
+            const campos = document.querySelectorAll('.answer-field');
+            campos.forEach((campo, index) => {
+                campo.addEventListener('input', function() {
+                    const palabras = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    const contadorId = 'wordCount' + (index + 1);
+                    const contadorElement = document.getElementById(contadorId);
+                    if (contadorElement) {
+                        contadorElement.textContent = palabras;
+                    }
+                    actualizarProgreso();
+                });
+            });
+
+            document.getElementById('studentName').addEventListener('input', actualizarVistaPreviaNombre);
+        }
+
+        function actualizarProgreso() {
+            const campos = document.querySelectorAll('.answer-field');
+            let completados = 0;
+            let total = campos.length;
+            
+            campos.forEach(campo => {
+                if (campo.value.trim().length > 0) completados++;
+            });
+            
+            const studentName = document.getElementById('studentName').value;
+            const studentId = document.getElementById('studentId').value;
+            const studentEmail = document.getElementById('studentEmail').value;
+            
+            if (studentName.trim().length > 0) completados++;
+            if (studentId.trim().length > 0) completados++;
+            if (studentEmail.trim().length > 0) completados++;
+            total += 3;
+            
+            const porcentaje = Math.min(100, (completados / total) * 100);
+            document.getElementById('progressBar').style.width = porcentaje + '%';
+            
+            const statusElement = document.getElementById('completionStatus');
+            if (porcentaje === 100) {
+                statusElement.innerHTML = '✅ ¡Felicidades! Has completado todas las secciones. Ya puedes guardar y exportar.';
+                statusElement.style.background = '#e8f5e9';
+                statusElement.style.color = '#2e7d32';
+            } else {
+                statusElement.innerHTML = `📝 Progreso: ${Math.round(porcentaje)}% completado. Sigue completando las secciones.`;
+                statusElement.style.background = '#fff3e0';
+                statusElement.style.color = '#e65100';
+            }
+        }
+
+        function validarCompletitud() {
+            const errores = [];
+            
+            const studentName = document.getElementById('studentName').value.trim();
+            const studentId = document.getElementById('studentId').value.trim();
+            const studentEmail = document.getElementById('studentEmail').value.trim();
+            
+            if (!studentName) errores.push("Nombre completo del estudiante");
+            if (!studentId) errores.push("Cédula de identidad");
+            if (!studentEmail) errores.push("Correo electrónico");
+            
+            const camposTexto = document.querySelectorAll('.answer-field');
+            camposTexto.forEach((campo, index) => {
+                if (campo.value.trim().length === 0) {
+                    errores.push(`Pregunta ${index + 1} (debes escribir una respuesta)`);
+                }
+            });
+            
+            if (errores.length === 0) {
+                alert('✅ ¡Perfecto! Todas las secciones están completas. Puedes exportar tu trabajo.');
+            } else {
+                alert('⚠️ Aún tienes secciones incompletas. Revisa: ' + errores.join(', '));
+            }
+        }
+
+        function guardarProgreso() {
+            const datos = {};
+            
+            datos.studentName = document.getElementById('studentName').value;
+            datos.studentId = document.getElementById('studentId').value;
+            datos.studentEmail = document.getElementById('studentEmail').value;
+            
+            const camposTexto = document.querySelectorAll('.answer-field');
+            camposTexto.forEach((campo, index) => {
+                datos[`respuesta_${index}`] = campo.value;
+            });
+            
+            localStorage.setItem('tarea1_evolucion_curricular', JSON.stringify(datos));
+            alert('✅ Progreso guardado correctamente. Puedes cerrar esta página y volver más tarde.');
+        }
+
+        function cargarProgreso() {
+            const guardado = localStorage.getItem('tarea1_evolucion_curricular');
+            if (guardado) {
+                const datos = JSON.parse(guardado);
+                
+                if (datos.studentName) document.getElementById('studentName').value = datos.studentName;
+                if (datos.studentId) document.getElementById('studentId').value = datos.studentId;
+                if (datos.studentEmail) document.getElementById('studentEmail').value = datos.studentEmail;
+                
+                const camposTexto = document.querySelectorAll('.answer-field');
+                camposTexto.forEach((campo, index) => {
+                    if (datos[`respuesta_${index}`]) {
+                        campo.value = datos[`respuesta_${index}`];
+                        campo.dispatchEvent(new Event('input'));
+                    }
+                });
+                
+                actualizarProgreso();
+                actualizarVistaPreviaNombre();
+            }
+        }
+
+        function exportarPDF() {
+            validarCompletitud();
+            
+            const nombre = document.getElementById('studentName').value;
+            let nombreArchivo = 'Tarea1_Evolucion_Curricular.pdf';
+            
+            if (nombre) {
+                const partes = nombre.split(' ');
+                const apellido = partes[partes.length - 1] || '';
+                const nombrePila = partes[0] || '';
+                nombreArchivo = `Tarea1_${apellido}_${nombrePila}.pdf`;
+            }
+            
+            document.querySelectorAll('.no-print').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            alert(`📄 Tu archivo se descargará como: ${nombreArchivo}\n\n⭐ Recuerda revisar el PDF antes de enviarlo para asegurarte de que todo esté correcto.`);
+            
+            window.print();
+            
+            setTimeout(() => {
+                document.querySelectorAll('.no-print').forEach(el => {
+                    el.style.display = '';
+                });
+            }, 1000);
+        }
+
+        function resetearFormulario() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo el formulario? Se perderán todas tus respuestas.')) {
+                localStorage.removeItem('tarea1_evolucion_curricular');
+                
+                document.querySelectorAll('.answer-field').forEach(campo => {
+                    campo.value = '';
+                    campo.dispatchEvent(new Event('input'));
+                });
+                
+                document.getElementById('studentName').value = '';
+                document.getElementById('studentId').value = '';
+                document.getElementById('studentEmail').value = '';
+                
+                actualizarProgreso();
+                actualizarVistaPreviaNombre();
+                alert('Formulario reiniciado correctamente.');
+            }
+        }
+
+        document.querySelectorAll('.form-control').forEach(elemento => {
+            elemento.addEventListener('change', actualizarProgreso);
+            elemento.addEventListener('input', actualizarProgreso);
+        });
+    </script>
+</body>
+</html>
