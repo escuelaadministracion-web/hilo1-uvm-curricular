@@ -82,84 +82,6 @@
             text-align: center;
         }
         
-        .weeks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .week-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #2575fc;
-            text-align: center;
-        }
-        
-        .week-number {
-            background: #2575fc;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .evaluation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .eval-item {
-            background: white;
-            padding: 12px;
-            border-radius: 6px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .points {
-            font-weight: bold;
-            color: #2575fc;
-        }
-        
-        .competencies-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .competencies-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .competencies-list li::before {
-            content: "✓";
-            color: #4caf50;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .total-points {
-            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        
         .activities-section {
             margin: 30px 0;
         }
@@ -236,91 +158,18 @@
             <h3>👨‍🏫 Profesor: Miguel Angel Subero</h3>
             <p><strong>Modalidad:</strong> Presencial y Virtual</p>
         </div>
-        
-        <div class="grid-container">
-            <div class="card">
-                <div class="card-header">
-                    <h3>🎯 Objetivo General</h3>
-                </div>
-                <p>Capacitar al estudiante para comprender el currículo desde sus fundamentos teóricos y prácticos, analizar los modelos venezolanos (CBN 1997 y CNB 2007) y diseñar un microcurrículo integrado con instrumentos de evaluación y componente PEIC.</p>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <h3>📊 Sistema de Evaluación</h3>
-                </div>
-                <div class="evaluation-grid">
-                    <div class="eval-item">
-                        <div>Hilos de Discusión</div>
-                        <div class="points">60 pts</div>
-                    </div>
-                    <div class="eval-item">
-                        <div>Tareas</div>
-                        <div class="points">120 pts</div>
-                    </div>
-                    <div class="eval-item">
-                        <div>Exámenes</div>
-                        <div class="points">320 pts</div>
-                    </div>
-                    <div class="eval-item">
-                        <div>Proyecto Final</div>
-                        <div class="points">250 pts</div>
-                    </div>
-                    <div class="eval-item">
-                        <div>Defensa Oral</div>
-                        <div class="points">200 pts</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="total-points">
-            TOTAL PUNTUACIÓN: 950 PUNTOS
-        </div>
-        
-        <div class="card">
-            <div class="card-header">
-                <h3>📚 Unidades Temáticas</h3>
-            </div>
-            <div class="weeks-grid">
-                <div class="week-item">
-                    <div class="week-number">I</div>
-                    <div>Concepto, evolución y modelos del currículo</div>
-                </div>
-                <div class="week-item">
-                    <div class="week-number">II</div>
-                    <div>Currículo Básico Nacional (1997)</div>
-                </div>
-                <div class="week-item">
-                    <div class="week-number">III</div>
-                    <div>Currículo Nacional Bolivariano (2007)</div>
-                </div>
-                <div class="week-item">
-                    <div class="week-number">IV</div>
-                    <div>Áreas, competencias y evaluación</div>
-                </div>
-                <div class="week-item">
-                    <div class="week-number">V</div>
-                    <div>PEIC y vinculación comunitaria</div>
-                </div>
-                <div class="week-item">
-                    <div class="week-number">VI</div>
-                    <div>Proyecto final y defensa</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- NUEVA SECCIÓN: ACTIVIDADES CON ENLACES -->
+
+        <!-- SECCIÓN PRINCIPAL DE ACTIVIDADES -->
         <div class="activities-section">
             <div class="card">
                 <div class="card-header">
-                    <h3>📅 Actividades Semanales</h3>
+                    <h3>📅 Actividades del Curso</h3>
                 </div>
                 <p style="text-align: center; margin: 15px 0; color: #666;">
                     Haz clic en cada actividad para acceder a la ficha interactiva correspondiente
                 </p>
                 
-                <!-- Semana 1 -->
+                <!-- Hilo 1 -->
                 <div class="activity-item">
                     <div class="activity-info">
                         <div class="activity-week">Semana 1</div>
@@ -330,7 +179,7 @@
                     <a href="Hilo1.html" class="activity-link">Acceder</a>
                 </div>
                 
-                <!-- Semana 2 -->
+                <!-- Tarea 1 -->
                 <div class="activity-item">
                     <div class="activity-info">
                         <div class="activity-week">Semana 2</div>
@@ -340,7 +189,7 @@
                     <a href="Tarea1EC.html" class="activity-link">Acceder</a>
                 </div>
                 
-                <!-- Semana 3 -->
+                <!-- Hilo 2 -->
                 <div class="activity-item">
                     <div class="activity-info">
                         <div class="activity-week">Semana 3</div>
@@ -350,7 +199,7 @@
                     <a href="Hilo2.html" class="activity-link">Acceder</a>
                 </div>
                 
-                <!-- Semana 4 -->
+                <!-- Actividades Futuras -->
                 <div class="activity-item">
                     <div class="activity-info">
                         <div class="activity-week">Semana 4</div>
@@ -360,7 +209,6 @@
                     <div class="coming-soon">Próximamente</div>
                 </div>
                 
-                <!-- Semana 5 -->
                 <div class="activity-item">
                     <div class="activity-info">
                         <div class="activity-week">Semana 5</div>
@@ -369,110 +217,35 @@
                     </div>
                     <div class="coming-soon">Próximamente</div>
                 </div>
-                
-                <!-- Semana 6 -->
-                <div class="activity-item">
-                    <div class="activity-info">
-                        <div class="activity-week">Semana 6</div>
-                        <div class="activity-title">Hilo de Discusión 3 - Estrategias de Evaluación</div>
-                        <div class="activity-points">20 puntos</div>
-                    </div>
-                    <div class="coming-soon">Próximamente</div>
-                </div>
-                
-                <!-- Semana 7 -->
-                <div class="activity-item">
-                    <div class="activity-info">
-                        <div class="activity-week">Semana 7</div>
-                        <div class="activity-title">Tarea 3 - PEIC y Contextos Educativos</div>
-                        <div class="activity-points">40 puntos</div>
-                    </div>
-                    <div class="coming-soon">Próximamente</div>
-                </div>
-                
-                <!-- Semana 8 -->
-                <div class="activity-item">
-                    <div class="activity-info">
-                        <div class="activity-week">Semana 8</div>
-                        <div class="activity-title">Examen 2 + Proyecto Final + Defensa</div>
-                        <div class="activity-points">650 puntos</div>
-                    </div>
-                    <div class="coming-soon">Próximamente</div>
-                </div>
             </div>
         </div>
-        
+
+        <!-- INFORMACIÓN ADICIONAL -->
         <div class="grid-container">
             <div class="card">
                 <div class="card-header">
-                    <h3>🔄 Cronograma Semanal</h3>
+                    <h3>📊 Sistema de Evaluación</h3>
                 </div>
-                <div style="max-height: 400px; overflow-y: auto;">
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead style="background: #f8f9fa; position: sticky; top: 0;">
-                            <tr>
-                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2575fc;">Semana</th>
-                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2575fc;">Actividad</th>
-                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2575fc;">Puntos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">1</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Hilo de Discusión 1</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">20 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">2</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Tarea 1 - Evolución Curricular</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">40 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">3</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Hilo de Discusión 2</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">20 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">4</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Examen 1</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">120 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">5</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Tarea 2 - Competencias</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">40 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">6</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Hilo de Discusión 3</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">20 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">7</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Tarea 3 - PEIC</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">40 pts</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">8</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Examen 2 + Proyecto + Defensa</td>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">650 pts</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <p><strong>Total: 950 puntos</strong></p>
+                <ul>
+                    <li>Hilos de Discusión: 60 pts</li>
+                    <li>Tareas: 120 pts</li>
+                    <li>Exámenes: 320 pts</li>
+                    <li>Proyecto Final: 250 pts</li>
+                    <li>Defensa Oral: 200 pts</li>
+                </ul>
             </div>
             
             <div class="card">
                 <div class="card-header">
-                    <h3>💪 Competencias a Desarrollar</h3>
+                    <h3>📚 Recursos</h3>
                 </div>
-                <ul class="competencies-list">
-                    <li>Comprender el concepto, evolución y modelos del currículo</li>
-                    <li>Analizar críticamente el CBN (1997) y el CNB (2007)</li>
-                    <li>Diseñar microcurrículos integrados con ejes transversales</li>
-                    <li>Elaborar instrumentos de evaluación coherentes</li>
-                    <li>Integrar el PEIC y vinculación escuela-comunidad</li>
-                    <li>Sustentar propuestas curriculares mediante defensa oral</li>
+                <ul>
+                    <li>Documentos oficiales CBN 1997</li>
+                    <li>Documentos oficiales CNB 2007</li>
+                    <li>Artículos académicos</li>
+                    <li>Plantillas de evaluación</li>
+                    <li>Guías metodológicas</li>
                 </ul>
             </div>
         </div>
