@@ -159,6 +159,69 @@
             font-size: 1.2rem;
             font-weight: bold;
         }
+        
+        .activities-section {
+            margin: 30px 0;
+        }
+        
+        .activity-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .activity-item:hover {
+            border-color: #2575fc;
+            transform: translateX(5px);
+        }
+        
+        .activity-info {
+            flex: 1;
+        }
+        
+        .activity-week {
+            font-weight: bold;
+            color: #2575fc;
+        }
+        
+        .activity-title {
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+        
+        .activity-points {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .activity-link {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .activity-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.3);
+        }
+        
+        .coming-soon {
+            background: #ff9800;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -243,6 +306,98 @@
                 <div class="week-item">
                     <div class="week-number">VI</div>
                     <div>Proyecto final y defensa</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NUEVA SECCIÓN: ACTIVIDADES CON ENLACES -->
+        <div class="activities-section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>📅 Actividades Semanales</h3>
+                </div>
+                <p style="text-align: center; margin: 15px 0; color: #666;">
+                    Haz clic en cada actividad para acceder a la ficha interactiva correspondiente
+                </p>
+                
+                <!-- Semana 1 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 1</div>
+                        <div class="activity-title">Hilo de Discusión 1 - "¿Por qué el currículo no es neutro?"</div>
+                        <div class="activity-points">20 puntos</div>
+                    </div>
+                    <a href="Hilo1.html" class="activity-link">Acceder</a>
+                </div>
+                
+                <!-- Semana 2 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 2</div>
+                        <div class="activity-title">Tarea 1 - Evolución Curricular Venezuela</div>
+                        <div class="activity-points">40 puntos</div>
+                    </div>
+                    <a href="Tarea1EC.html" class="activity-link">Acceder</a>
+                </div>
+                
+                <!-- Semana 3 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 3</div>
+                        <div class="activity-title">Hilo de Discusión 2 - Análisis CBN 1997</div>
+                        <div class="activity-points">20 puntos</div>
+                    </div>
+                    <a href="Hilo2.html" class="activity-link">Acceder</a>
+                </div>
+                
+                <!-- Semana 4 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 4</div>
+                        <div class="activity-title">Examen 1 - Currículo Nacional Bolivariano</div>
+                        <div class="activity-points">120 puntos</div>
+                    </div>
+                    <div class="coming-soon">Próximamente</div>
+                </div>
+                
+                <!-- Semana 5 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 5</div>
+                        <div class="activity-title">Tarea 2 - Competencias e Indicadores</div>
+                        <div class="activity-points">40 puntos</div>
+                    </div>
+                    <div class="coming-soon">Próximamente</div>
+                </div>
+                
+                <!-- Semana 6 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 6</div>
+                        <div class="activity-title">Hilo de Discusión 3 - Estrategias de Evaluación</div>
+                        <div class="activity-points">20 puntos</div>
+                    </div>
+                    <div class="coming-soon">Próximamente</div>
+                </div>
+                
+                <!-- Semana 7 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 7</div>
+                        <div class="activity-title">Tarea 3 - PEIC y Contextos Educativos</div>
+                        <div class="activity-points">40 puntos</div>
+                    </div>
+                    <div class="coming-soon">Próximamente</div>
+                </div>
+                
+                <!-- Semana 8 -->
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-week">Semana 8</div>
+                        <div class="activity-title">Examen 2 + Proyecto Final + Defensa</div>
+                        <div class="activity-points">650 puntos</div>
+                    </div>
+                    <div class="coming-soon">Próximamente</div>
                 </div>
             </div>
         </div>
